@@ -114,10 +114,7 @@ virtualenvs/
 
 /media
 
-deploy.sh
 
 env.sh
-
-docker-compose.yml
 
 Pipfile.lock
