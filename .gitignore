@@ -114,7 +114,6 @@ virtualenvs/
 
 /media
 
-
 env.sh
 
 Pipfile.lock
