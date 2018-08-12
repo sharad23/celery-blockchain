@@ -21,7 +21,7 @@ def  hello(world):
 
 @app.task
 def sales_commit(product, amount, account, transaction):
-    web3_host = os.environ.get('SALES_COMMIT')
+    web3_host = os.environ.get('SALES_COMMIT', 'http://54.95.6.178:8000/sales-commit/')
     print('&&&&&')
     print(web3_host)
     data = {
@@ -34,7 +34,7 @@ def sales_commit(product, amount, account, transaction):
     print('******')
     print(web3_res.json())
     if web3_res.status_code in [200, 201, 202] :
-        taf_host = os.environ.get('GENERATE_COMMISSION')
+        taf_host = os.environ.get('GENERATE_COMMISSION', 'http://54.95.6.178:8000/commission-generate/')
         taf_res = requests.post(url=taf_host, data=data)
         if taf_res.status_code == 200:
             return True
@@ -43,7 +43,7 @@ def sales_commit(product, amount, account, transaction):
 
 @app.task
 def commission_commit(account, commission):
-    web3_host = os.environ.get('COMMISSION_COMMIT')
+    web3_host = os.environ.get('COMMISSION_COMMIT', 'http://54.95.6.178:8000/commission-commit/')
     data = {
         'account_id': account,
         'number': commission
@@ -58,12 +58,12 @@ def commission_commit(account, commission):
 
 @app.task
 def get_total_commission(account):
-    web3_host = os.environ.get('GET_COMMISSION')
+    web3_host = os.environ.get('GET_COMMISSION', 'http://54.95.6.178:8000/commission/{}')
     web3_host = web3_host.format(account)
     web3_res = requests.get(url=web3_host)
     if web3_res.status_code in [200, 201, 202]:
         data = web3_res.json()
-        taf_host = os.environ.get('POST_COMMISSION')
+        taf_host = os.environ.get('POST_COMMISSION', 'http://54.95.6.178:8000/post-commission/')
         taf_res = requests.post(url=taf_host, data=json.dumps(data), headers={'content-type': 'application/json'})
         if taf_res.status_code in [200, 201, 202]:
             return True
