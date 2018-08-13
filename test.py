@@ -37,4 +37,4 @@ class TestGetTotalCommision(TestCase):
                 ins.status_code = 200
                 res = get_total_commission(10)
                 self.assertEqual(bmock.called, True)
-                self.assertEqual(res, False)
+                self.assertEqual(res, True)
