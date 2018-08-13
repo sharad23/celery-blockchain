@@ -18,8 +18,8 @@ pipeline {
 node {
     stage('Build') {
         imagePrune()
-        sh "docker build -t celery -f Celery ."
-        sh "docker build -t flower -f Flower ."
+        sh "docker build -t celery ."
+        sh "docker build -t flower ."
 
     }
     stage('Deploy'){
