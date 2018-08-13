@@ -55,7 +55,6 @@ def commission_commit(account, commission):
         return True
     return False
 
-
 @app.task
 def get_total_commission(account):
     web3_host = os.environ.get('GET_COMMISSION', 'http://54.95.6.178:8000/commission/{}')
