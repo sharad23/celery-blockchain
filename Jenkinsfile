@@ -24,9 +24,9 @@ node {
     }
 
     stage('Deploy'){
-        sh "docker run -d  -p 15672:15672  -p 5672:5672 --name rabbit1 rabbitmq:3"
-        sh "docker run -d --link rabbit1:rabbit --name celery celery"
-        sh "docker run -d -p 5555:5555 --link rabbit1:rabbit --name flower flower"
+        sh "docker run -d  -p 15672:15672  -p 5672:5672 --name rabbit1 rabbitmq:3 "
+        sh "docker run -d --link rabbit1:rabbit --name celery celery ./start_celery.sh"
+        sh "docker run -d -p 5555:5555 --link rabbit1:rabbit --name flower flower ./start_flower.sh"
     }
 }
 
