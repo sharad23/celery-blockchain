@@ -17,7 +17,7 @@ pipeline {
 }
 node {
     stage('Build') {
-        imagePrune(CONTAINER_NAME)
+        imagePrune()
         sh "docker build -t celery -f Celery ."
         sh "docker build -t flower -f Flower ."
 
@@ -29,7 +29,7 @@ node {
     }
 }
 
-def imagePrune(containerName){
+def imagePrune(){
     try {
         sh "docker image prune -f"
     } catch(error){
